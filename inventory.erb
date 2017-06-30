@@ -1,0 +1,24 @@
+[OSEv3:children]
+masters
+nodes
+
+[OSEv3:vars]
+ansible_ssh_user=centos
+ansible_become=true
+deployment_type=origin
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+containerized=true
+openshift_release=v1.5.0
+openshift_image_tag=v1.5.1
+openshift_public_hostname=console.dst-reference.info
+openshift_master_default_subdomain=apps.dst-reference.info
+openshift_hosted_metrics_deploy=false
+
+openshift_master_overwrite_named_certificates=true
+
+[masters]
+console.dst-reference.info openshift_schedulable=true
+
+[nodes]
+console.dst-reference.info openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+node1.dst-reference.info openshift_node_labels="{'region': 'primary', 'zone': 'default'}"
